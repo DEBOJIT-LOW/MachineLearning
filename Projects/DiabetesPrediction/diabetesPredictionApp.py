@@ -1,6 +1,7 @@
 import numpy as np
 import pickle
 import streamlit as st
+import os
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "diabetes_model.sav")
 load = pickle.load(open(MODEL_PATH, "rb"))
@@ -41,5 +42,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
