@@ -22,22 +22,25 @@ def main():
 
     uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
     if uploaded_file is not None:
-        data = pd.read_csv(uploaded_file)
-        st.subheader("Uploaded Data Preview")
-        st.write(data.head())
-        predictions = load.predict(
-            data.drop(columns=["Class"], errors="ignore"))
-
-        data["Prediction"] = predictions
-        data["Prediction"] = data["Prediction"].map(
-            {0: "Not Fraud", 1: "Fraud"})
-
-        st.subheader("Prediction Results")
-        st.write(data.head(20))
-
-        fraud_count = (data["Prediction"] == "Fraud").sum()
-        st.success(f"✅ Detected {fraud_count} fraudulent transactions.")
-
+        try:
+            data = pd.read_csv(uploaded_file)
+            st.subheader("Uploaded Data Preview")
+            st.write(data.head())
+            predictions = load.predict(
+                data.drop(columns=["Class"], errors="ignore"))
+    
+            data["Prediction"] = predictions
+            data["Prediction"] = data["Prediction"].map(
+                {0: "Not Fraud", 1: "Fraud"})
+    
+            st.subheader("Prediction Results")
+            st.write(data.head(20))
+    
+            fraud_count = (data["Prediction"] == "Fraud").sum()
+            st.success(f"✅ Detected {fraud_count} fraudulent transactions.")
+        except:
+            st.error("Please ensure the format of data is correct!")
 
 if __name__ == "__main__":
     main()
+
