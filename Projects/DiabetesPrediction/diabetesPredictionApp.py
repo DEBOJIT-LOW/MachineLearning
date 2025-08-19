@@ -4,6 +4,8 @@ import streamlit as st
 load = pickle.load(open(
     "D:/DEBOJIT/Machine_Learning/Projects/DiabetesPrediction/diabetes_model.sav", 'rb'))
 
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "diabetes_model.sav")
+load = pickle.load(open(MODEL_PATH, "rb"))
 
 def predict_diabetes(input_data):
     input_data = np.asarray(input_data).reshape(1, -1)
@@ -41,3 +43,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
